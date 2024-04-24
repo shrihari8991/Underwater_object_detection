@@ -86,8 +86,6 @@ validators==0.22.0
 watchdog==3.0.0
 zipp==3.16.2
 streamlit
-settings
-helper
 streamlit.components.v1
 streamlit_img_label.manage
 streamlit_img_label
