@@ -64,46 +64,46 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
                    )
 
 
-# def play_youtube_video(conf, model):
-#     """
-#     Plays a webcam stream. Detects Objects in real-time using the YOLOv8 object detection model.
+def play_youtube_video(conf, model):
+    """
+    Plays a webcam stream. Detects Objects in real-time using the YOLOv8 object detection model.
 
-#     Parameters:
-#         conf: Confidence of YOLOv8 model.
-#         model: An instance of the `YOLOv8` class containing the YOLOv8 model.
+    Parameters:
+        conf: Confidence of YOLOv8 model.
+        model: An instance of the `YOLOv8` class containing the YOLOv8 model.
 
-#     Returns:
-#         None
+    Returns:
+        None
 
-#     Raises:
-#         None
-#     """
-#     source_youtube = st.sidebar.text_input("YouTube Video url")
+    Raises:
+        None
+    """
+    source_youtube = st.sidebar.text_input("YouTube Video url")
 
-#     is_display_tracker, tracker = display_tracker_options()
+    is_display_tracker, tracker = display_tracker_options()
 
-#     if st.sidebar.button('Detect Objects'):
-#         try:
-#             yt = YouTube(source_youtube)
-#             stream = yt.streams.filter(file_extension="mp4", res=720).first()
-#             vid_cap = cv2.VideoCapture(stream.url)
+    if st.sidebar.button('Detect Objects'):
+        try:
+            yt = YouTube(source_youtube)
+            stream = yt.streams.filter(file_extension="mp4", res=720).first()
+            vid_cap = cv2.VideoCapture(stream.url)
 
-#             st_frame = st.empty()
-#             while (vid_cap.isOpened()):
-#                 success, image = vid_cap.read()
-#                 if success:
-#                     _display_detected_frames(conf,
-#                                              model,
-#                                              st_frame,
-#                                              image,
-#                                              is_display_tracker,
-#                                              tracker,
-#                                              )
-#                 else:
-#                     vid_cap.release()
-#                     break
-#         except Exception as e:
-#             st.sidebar.error("Error loading video: " + str(e))
+            st_frame = st.empty()
+            while (vid_cap.isOpened()):
+                success, image = vid_cap.read()
+                if success:
+                    _display_detected_frames(conf,
+                                             model,
+                                             st_frame,
+                                             image,
+                                             is_display_tracker,
+                                             tracker,
+                                             )
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.sidebar.error("Error loading video: " + str(e))
 
 
 # def play_rtsp_stream(conf, model):
@@ -185,47 +185,47 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
 #             st.sidebar.error("Error loading video: " + str(e))
 
 
-# def play_stored_video(conf, model):
-#     """
-#     Plays a stored video file. Tracks and detects objects in real-time using the YOLOv8 object detection model.
+def play_stored_video(conf, model):
+    """
+    Plays a stored video file. Tracks and detects objects in real-time using the YOLOv8 object detection model.
 
-#     Parameters:
-#         conf: Confidence of YOLOv8 model.
-#         model: An instance of the `YOLOv8` class containing the YOLOv8 model.
+    Parameters:
+        conf: Confidence of YOLOv8 model.
+        model: An instance of the `YOLOv8` class containing the YOLOv8 model.
 
-#     Returns:
-#         None
+    Returns:
+        None
 
-#     Raises:
-#         None
-#     """
-#     source_vid = st.sidebar.selectbox(
-#         "Choose a video...", settings.VIDEOS_DICT.keys())
+    Raises:
+        None
+    """
+    source_vid = st.sidebar.selectbox(
+        "Choose a video...", settings.VIDEOS_DICT.keys())
 
-#     is_display_tracker, tracker = display_tracker_options()
+    is_display_tracker, tracker = display_tracker_options()
 
-#     with open(settings.VIDEOS_DICT.get(source_vid), 'rb') as video_file:
-#         video_bytes = video_file.read()
-#     if video_bytes:
-#         st.video(video_bytes)
+    with open(settings.VIDEOS_DICT.get(source_vid), 'rb') as video_file:
+        video_bytes = video_file.read()
+    if video_bytes:
+        st.video(video_bytes)
 
-#     if st.sidebar.button('Detect Video Objects'):
-#         try:
-#             vid_cap = cv2.VideoCapture(
-#                 str(settings.VIDEOS_DICT.get(source_vid)))
-#             st_frame = st.empty()
-#             while (vid_cap.isOpened()):
-#                 success, image = vid_cap.read()
-#                 if success:
-#                     _display_detected_frames(conf,
-#                                              model,
-#                                              st_frame,
-#                                              image,
-#                                              is_display_tracker,
-#                                              tracker
-#                                              )
-#                 else:
-#                     vid_cap.release()
-#                     break
-#         except Exception as e:
-#             st.sidebar.error("Error loading video: " + str(e))
+    if st.sidebar.button('Detect Video Objects'):
+        try:
+            vid_cap = cv2.VideoCapture(
+                str(settings.VIDEOS_DICT.get(source_vid)))
+            st_frame = st.empty()
+            while (vid_cap.isOpened()):
+                success, image = vid_cap.read()
+                if success:
+                    _display_detected_frames(conf,
+                                             model,
+                                             st_frame,
+                                             image,
+                                             is_display_tracker,
+                                             tracker
+                                             )
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.sidebar.error("Error loading video: " + str(e))
