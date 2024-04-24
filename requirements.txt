@@ -88,7 +88,7 @@ zipp==3.16.2
 streamlit
 streamlit_img_label
 ultralytics
-cv2
+opencv-contrib-python
 pytube
 pathlib
 sys
