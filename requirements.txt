@@ -86,7 +86,6 @@ validators==0.22.0
 watchdog==3.0.0
 zipp==3.16.2
 streamlit
-glob
 json
 settings
 helper
