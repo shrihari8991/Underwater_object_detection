@@ -91,4 +91,3 @@ ultralytics
 opencv-contrib-python
 pytube
 pathlib
-sys
