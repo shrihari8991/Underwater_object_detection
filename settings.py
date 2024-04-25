@@ -39,6 +39,9 @@ VIDEOS_DICT = {
   #'video_3': VIDEO_3_PATH,
 }
 
+#Youtube config
+DEFAULT_URL = 'https://www.youtube.com/watch?v=CibUJw4L62w'
+
 # ML Model config
 MODEL_DIR = ROOT / 'weights'
 
