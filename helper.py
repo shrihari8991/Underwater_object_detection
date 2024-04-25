@@ -80,9 +80,7 @@ def play_youtube_video(conf, model):
     """
     source_youtube = st.sidebar.text_input("YouTube Video url")
 
-    is_display_tracker, tracker = display_tracker_options()
-
-    if source_youtube is None:
+    if len(source_youtube) == 0:
         try:
             yt = YouTube(settings.DEFAULT_URL)
             stream = yt.streams.filter(file_extension="mp4", res=720).first()
@@ -96,37 +94,37 @@ def play_youtube_video(conf, model):
                                              model,
                                              st_frame,
                                              image,
-                                             is_display_tracker,
-                                             tracker,
                                              )
                 else:
                     vid_cap.release()
                     break
         except Exception as e:
             st.sidebar.error("Error loading video: " + str(e))
-
-    if st.sidebar.button('Detect Objects'):
-        try:
-            yt = YouTube(source_youtube)
-            stream = yt.streams.filter(file_extension="mp4", res=720).first()
-            vid_cap = cv2.VideoCapture(stream.url)
-
-            st_frame = st.empty()
-            while (vid_cap.isOpened()):
-                success, image = vid_cap.read()
-                if success:
-                    _display_detected_frames(conf,
-                                             model,
-                                             st_frame,
-                                             image,
-                                             is_display_tracker,
-                                             tracker,
-                                             )
-                else:
-                    vid_cap.release()
-                    break
-        except Exception as e:
-            st.sidebar.error("Error loading video: " + str(e))
+    else:
+        is_display_tracker, tracker = display_tracker_options()
+        
+        if st.sidebar.button('Detect Objects'):
+            try:
+                yt = YouTube(source_youtube)
+                stream = yt.streams.filter(file_extension="mp4", res=720).first()
+                vid_cap = cv2.VideoCapture(stream.url)
+    
+                st_frame = st.empty()
+                while (vid_cap.isOpened()):
+                    success, image = vid_cap.read()
+                    if success:
+                        _display_detected_frames(conf,
+                                                 model,
+                                                 st_frame,
+                                                 image,
+                                                 is_display_tracker,
+                                                 tracker,
+                                                 )
+                    else:
+                        vid_cap.release()
+                        break
+            except Exception as e:
+                st.sidebar.error("Error loading video: " + str(e))
 
 
 # def play_rtsp_stream(conf, model):
